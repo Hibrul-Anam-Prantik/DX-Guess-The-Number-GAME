@@ -20,21 +20,56 @@ document.querySelector('.score').textContent = score;
 
 document.querySelector('.check-btn').addEventListener('click', function () {
   const guessedNumber = Number(document.querySelector('.guess-number').value);
+
   if (!guessedNumber)
     document.querySelector('.msg').textContent = '⛔ Enter a valid Number!';
-  else if (guessedNumber > secretNum) {
-    document.querySelector('.msg').textContent = '📈 Too High!';
-    score--;
-    document.querySelector('.score').textContent = score;
-  } else if (guessedNumber < secretNum) {
-    document.querySelector('.msg').textContent = '📉 Too Low!';
-    score--;
-    document.querySelector('.score').textContent = score;
-  } else {
+  else if (guessedNumber === secretNum) {
     document.querySelector('.number').textContent = secretNum;
     document.querySelector('.msg').textContent = '🎉 BINGO!!';
     document.querySelector('body').style.backgroundColor = '#058800ff';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.score').style.fontSize = '3rem';
+    return;
+  } else {
+    document.querySelector('.msg').textContent =
+      guessedNumber > secretNum ? '📈 Too High!' : '📉 Too Low!';
+    score--;
+    document.querySelector('.score').textContent = score;
+
+    if (score < 1) {
+      document.querySelector('.msg').textContent = '💥 Lost the Game!';
+      document.querySelector('.score').textContent = 0;
+      document.querySelector('.number').textContent = secretNum;
+      document.querySelector('body').style.backgroundColor = '#a53434ff';
+      return;
+    }
   }
+  // } else if (guessedNumber > secretNum) {
+  // document.querySelector('.msg').textContent = '📈 Too High!';
+  // score--;
+  // document.querySelector('.score').textContent = score;
+  // if (score < 1) {
+  //   document.querySelector('.msg').textContent = '‼️ Lost the Game!';
+  //   document.querySelector('.score').textContent = 0;
+  //   document.querySelector('.body').style.backgroundColor = 'red';
+  //   return;
+  // }
+  //   } else if (guessedNumber < secretNum) {
+  //     document.querySelector('.msg').textContent = '📉 Too Low!';
+  //     score--;
+  //     document.querySelector('.score').textContent = score;
+  //     if (score < 1) {
+  //       document.querySelector('.msg').textContent = '‼️ Lost the Game!';
+  //       document.querySelector('.score').textContent = 0;
+  //       document.querySelector('.body').style.backgroundColor = 'red';
+  //       return;
+  //     }
+  //   }
+  //   else {
+  //     document.querySelector('.number').textContent = secretNum;
+  //     document.querySelector('.msg').textContent = '🎉 BINGO!!';
+  //     document.querySelector('body').style.backgroundColor = '#058800ff';
+  //     document.querySelector('.number').style.width = '30rem';
+  //     document.querySelector('.score').style.fontSize = '3rem';
+  //   }
 });
