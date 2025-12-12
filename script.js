@@ -6,7 +6,7 @@
 // document.querySelector('.guess-number').value = 23; // Setting input value to 23
 // console.log(document.querySelector('.guess-number').value); // Getting input value
 
-const secretNum = Math.trunc(Math.random() * 20) + 1; // Generating random number between 1 to 20
+let secretNum = Math.trunc(Math.random() * 20) + 1; // Generating random number between 1 to 20
 // check btn event listener -- for outputs
 // document.querySelector('.check-btn').addEventListener('click', function () {
 //   const guessedNum = Number(document.querySelector('.guess-number').value);
@@ -33,6 +33,7 @@ document.querySelector('.check-btn').addEventListener('click', function () {
     document.querySelector('body').style.backgroundColor = '#058800ff';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.score').style.fontSize = '3rem';
+    document.querySelector('.check-btn').disabled = true;
     return;
   } else {
     document.querySelector('.msg').textContent =
@@ -45,6 +46,7 @@ document.querySelector('.check-btn').addEventListener('click', function () {
       document.querySelector('.score').textContent = 0;
       document.querySelector('.number').textContent = secretNum;
       document.querySelector('body').style.backgroundColor = '#a53434ff';
+      document.querySelector('.check-btn').disabled = true;
       return;
     }
   }
@@ -76,4 +78,18 @@ document.querySelector('.check-btn').addEventListener('click', function () {
   //     document.querySelector('.number').style.width = '30rem';
   //     document.querySelector('.score').style.fontSize = '3rem';
   //   }
+});
+
+// again --> to restart the game or kinda reset all the values to the initial state
+document.querySelector('.again-btn').addEventListener('click', function () {
+  document.querySelector('body').style.backgroundColor = 'rgb(28, 28, 28)';
+  score = 20;
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.guess-number').value = '';
+  document.querySelector('.number').style.width = '15rem';
+  document.querySelector('.score').style.fontSize = '2rem';
+  secretNum = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.msg').textContent = 'Start guessing...';
+  document.querySelector('.check-btn').disabled = false;
 });
