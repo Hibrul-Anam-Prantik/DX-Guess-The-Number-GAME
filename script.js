@@ -7,7 +7,7 @@
 // console.log(document.querySelector('.guess-number').value); // Getting input value
 
 const secretNum = Math.trunc(Math.random() * 20) + 1; // Generating random number between 1 to 20
-// check btn event listener
+// check btn event listener -- for outputs
 // document.querySelector('.check-btn').addEventListener('click', function () {
 //   const guessedNum = Number(document.querySelector('.guess-number').value);
 //   if (!guessedNum) console.log('⛔ Enter a valid Number!');
@@ -15,17 +15,26 @@ const secretNum = Math.trunc(Math.random() * 20) + 1; // Generating random numbe
 //   else if (guessedNum < secretNum) console.log('📉 Too Low!');
 //   else console.log('🎉 Yep!! You got the Number!');
 // });
+let score = 20;
+document.querySelector('.score').textContent = score;
 
 document.querySelector('.check-btn').addEventListener('click', function () {
   const guessedNumber = Number(document.querySelector('.guess-number').value);
   if (!guessedNumber)
     document.querySelector('.msg').textContent = '⛔ Enter a valid Number!';
-  else if (guessedNumber > secretNum)
+  else if (guessedNumber > secretNum) {
     document.querySelector('.msg').textContent = '📈 Too High!';
-  else if (guessedNumber < secretNum)
+    score--;
+    document.querySelector('.score').textContent = score;
+  } else if (guessedNumber < secretNum) {
     document.querySelector('.msg').textContent = '📉 Too Low!';
-  else {
+    score--;
+    document.querySelector('.score').textContent = score;
+  } else {
     document.querySelector('.number').textContent = secretNum;
     document.querySelector('.msg').textContent = '🎉 BINGO!!';
+    document.querySelector('body').style.backgroundColor = '#058800ff';
+    document.querySelector('.number').style.width = '30rem';
+    document.querySelector('.score').style.fontSize = '3rem';
   }
 });
