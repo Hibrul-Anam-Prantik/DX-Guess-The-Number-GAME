@@ -20,33 +20,36 @@ let score = 20,
 document.querySelector('.score').textContent = score;
 document.querySelector('.hscore').textContent = highScore;
 
+// display message function to avoid repetition
+const displayMessage = function (message) {
+  document.querySelector('.msg').textContent = message;
+};
+
 document.querySelector('.check-btn').addEventListener('click', function () {
   const guessedNumber = Number(document.querySelector('.guess-number').value);
 
-  if (!guessedNumber)
-    document.querySelector('.msg').textContent = '⛔ Enter a valid Number!';
+  if (!guessedNumber) displayMessage('⛔ Enter a valid Number!');
   else if (guessedNumber === secretNum) {
     document.querySelector('.number').textContent = secretNum;
     highScore = Math.max(highScore, score);
     document.querySelector('.hscore').textContent = highScore;
-    document.querySelector('.msg').textContent = '🎉 BINGO!!';
+    displayMessage('🎉 BINGO!!');
     document.querySelector('body').style.backgroundColor = '#058800ff';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.score').style.fontSize = '3rem';
     document.querySelector('.check-btn').disabled = true;
     return;
   } else {
-    document.querySelector('.msg').textContent =
-      guessedNumber > secretNum ? '📈 Too High!' : '📉 Too Low!';
+    displayMessage(guessedNumber > secretNum ? '📈 Too High!' : '📉 Too Low!');
     score--;
     document.querySelector('.score').textContent = score;
 
     if (score < 1) {
-      document.querySelector('.msg').textContent = '💥 Lost the Game!';
+      displayMessage('💥 Lost the Game!');
       document.querySelector('.score').textContent = 0;
       document.querySelector('.number').textContent = secretNum;
       document.querySelector('body').style.backgroundColor = '#a53434ff';
-      document.querySelector('.check-btn').disabled = true;
+      document.querySelector('.check-btn').disabled = true; // disabling check button after losing
       return;
     }
   }
@@ -90,6 +93,6 @@ document.querySelector('.again-btn').addEventListener('click', function () {
   document.querySelector('.score').style.fontSize = '2rem';
   secretNum = Math.trunc(Math.random() * 20) + 1;
   document.querySelector('.number').textContent = '?';
-  document.querySelector('.msg').textContent = 'Start guessing...';
-  document.querySelector('.check-btn').disabled = false;
+  displayMessage('Start guessing...');
+  document.querySelector('.check-btn').disabled = false; // enabling check button again
 });
