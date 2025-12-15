@@ -96,4 +96,5 @@ document.querySelector('.again-btn').addEventListener('click', function () {
   document.querySelector('.number').textContent = '?';
   displayMessage('Start guessing...');
   document.querySelector('.check-btn').disabled = false; // enabling check button again
+  document.querySelector('.guess-number').disabled = false; // enabling input field again
 });
